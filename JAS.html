@@ -3,41 +3,102 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- <script type="text/javascript" src="C:\xampp\htdocs\js\js_project\slutproject\jquery"></script> -->
     <title>JAS</title>
   </head>
   <body>
-    <header>
-      <h1> <img src="img/jas.png" alt="jas logo" width="200" height="100">  J Anime School</h1>
-    </header>
-    <nav>
-      <ul>
-        <li><a href="JAS.html">Start<a></li>
-        <li><a href="cas-2.html">Utbildning<a></li>
-        <li><a href="cas-3.html">Ansöka<a></li>
-      </ul>
-    </nav>
-    <br><br><br>
-    <section>
-      <h3>01. Squash and stretch</h3>
-      <p>The 12 principles of animation were first introduced by Disney animators Ollie Johnston and Frank Thomas in their book The Illusion of Life: Disney Animation, which was first released in 1981.<br>
-        In this book, Johnston and Thomas examine the work of leading Disney animators from the 1930s and onwards, and boil their approach down to 12 basic principles of animation.<br>
-        These principles form the basis of all animation work and are relevant for a number of different fields. <br>
-        The most obvious use is for animating a character (read more about character design here), but these rules are also an invaluable guide in other areas, for example, if you want to introduce motion into your interface with some CSS animation.<br>
-        Here, we take a closer look at each principle of animation. <br>
-        To see them in action, consider signing up to Disney Plus.<br>
-        This article features GIFs from Vincenzo Lodigiani, who also made the short video The Illusion of Life (below).</p>
-        <h3>01. Squash and stretch</h3>
-        <p>The squash and stretch principle is considered the most important of the 12 principles of animation. <br>
-          When applied, it gives your animated characters and objects the illusion of gravity, weight, mass and flexibility. <br>
-          Think about how a bouncing rubber ball may react when tossed into the air: the ball stretches when it travels up and down and squishes when it hits the ground.<br>
-          When using squash and stretch, it's important to keep the object's volume consistent. <br>
-          So when you stretch something it needs to get thinner, and when you squash something it needs to get wider.</p>
-          <h3>02. Anticipation</h3>
-          <p>The squash and stretch principle is considered the most important of the 12 principles of animation. <br>
-          When applied, it gives your animated characters and objects the illusion of gravity, weight, mass and flexibility. <br>
-          Think about how a bouncing rubber ball may react when tossed into the air: the ball stretches when it travels up and down and squishes when it hits the ground.<br>
-          When using squash and stretch, it's important to keep the object's volume consistent. <br>
-          So when you stretch something it needs to get thinner, and when you squash something it needs to get wider. <a href="cas-2.html"><b>see more</b></a></p>
-    </section>
+    <div class="_header">
+      <div class="logo">
+        <h1>J A S</h1>
+      </div>
+      <div class="_navigation">
+        <a href="#main">Home</a>
+        <a href="#programs">Programs</a>
+        <a href="#apply">Apply</a>
+        <!-- <a href="video.html">Video</a> -->
+        <button id="start">J A S</button>
+      </div>
+    </div>
+    <div class="anime">
+      J A S
+    </div>
+    <div class="_speechContainer">
+      <div class="_speechListning">
+        <div class="obj"></div>
+        <div class="obj"></div>
+        <div class="obj"></div>
+        <div class="obj"></div>
+        <div class="obj"></div>
+        <div class="obj"></div>
+        <div class="obj"></div>
+        <div class="obj"></div>
+        <div class="obj"></div>
+        <div class="obj"></div>
+        <div class="obj"></div>
+        <div class="obj"></div>
+        <div class="obj"></div>
+        <div class="obj"></div>
+        <div class="obj"></div>
+        <div class="obj"></div>
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="paragraf">
+        <h4 class="typin">Designing, drawing nand making</h4>
+        <p>live is</p>
+        <p>Animation.</p>
+        <p>That is why we love it.</p>
+        <div class="speech">
+          <p id="outout"></p>
+        </div>
+      </div>
+    </div>
+    <div id="programs" class="programs">
+      <div class="paragraf">
+        <p class="papply">Apply for designing, drawing and</p>
+        <p>making animations</p>
+        <p>With:</p>
+        <p>C4D, <br>Blender, <br>Maia and many more...</p>
+      </div>
+    </div>
+    <div id="apply" class="apply">
+      <div class="formoler">
+        <form class="" action="vr.html" method="get">
+          <label for="fname">Förnamn</label><br>
+          <input type="text" id="fname" name="fname" placeholder="Förnamn" required><br><br>
+          <label for="lname">Efternamn</label><br>
+          <input type="text" name="lname" id="lname" placeholder="Efternamn" required><br><br>
+          <label for="pnummer">Personnummer</label><br>
+          <input type="number" id="pnummer" name="pnummer" placeholder="Personnummer" required><br><br>
+          <label for="epost">Epost</label><br>
+          <input type="email" id="epost" name="epost" placeholder="Epost" required><br><br>
+          <label for="klass">Klass</label><br>
+          <input list="klass" required><br><br>
+          <datalist id="klass">
+            <option value="Maia">
+            <option value="Illustrator">
+            <option value="Blander">
+            <option value="C4D">
+          </datalist>
+          <label for="läsår">Läsår</label><br>
+          <input list="läsår" required><br><br>
+          <datalist id="läsår">
+            <option value="1">
+            <option value="2">
+            <option value="3">
+          </datalist>
+          <label for="bildhantering-in">Godkänner du bildhantering internet?</label>
+          <input type="checkbox" id="bildhantering-in" name="bildhantering-in" value=""><br><br>
+          <label for="bildhantering-ex">Godkänner du bildhantering externt?</label>
+          <input type="checkbox" id="bildhantering-ex" name="bildhantering-ex" value=""><br><br>
+          <input type="submit" name="submit" value="Skicka vidare"><br><br>
+        </form>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/min.js"></script>
+    <script type="text/javascript" src="js/speechReco.js"></script>
   </body>
 </html>
