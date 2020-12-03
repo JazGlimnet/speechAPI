@@ -50,43 +50,46 @@ function getMySound() {
 }
 
 recognition.onresult = function(event) {
-console.log(event);
+
   var speechResult = event.results[event.results.length - 1][0].transcript.toLowerCase();
   const outPutResult = diagnosticPara.textContent = speechResult;
   document.querySelector('._speechContainer').style.display = 'none';
   // speakUp(outPutResult);
 
-  if(waitingForLastN === true){
-    const lastName = event.results[event.results.length -1][0].transcript.trim();
-    document.querySelector('#lname').value = lastName;
-    // lastName.delete;
-    waitingForLastN = false;
-    if(lastName){
-      speakUp('what is your E mail address?');
-      waitingForEmail = true;
-    }
-  }
-
   if(waitingForEmail === true){
     const ePost = event.results[event.results.length -1][0].transcript.trim();
     document.querySelector('#epost').value = ePost;
-    ePost.delete;
     waitingForEmail = false;
     if(ePost){
       speakUp('what is your ID number?');
-      // waitingForID = true;
-      console.log(ePost);
-      console.log(event);
+      waitingForPhone = true;
     }
   }
-
+  if(waitingForID === true){
+    const id = event.results[event.results.length -1][0].transcript.trim();
+    document.querySelector('#epost').value = id;
+    waitingForID = false;
+    if(id){
+      speakUp('what is your ID number?');
+      waitingForEmail = true;
+    }
+  }
+  if(waitingForLastN === true){
+    const lastName = event.results[event.results.length -1][0].transcript.trim();
+    document.querySelector('#lname').value = lastName;
+    waitingForLastN = false;
+    if(lastName){
+      speakUp('what is your E mail address?');
+      waitingForID = true;
+    }
+  }
   if(waitingForN === true){
     //speakUp('what is your name?');
-    const firstName = event.results[event.results.length -1][0].transcript.trim();
-    document.querySelector('#fname').value = firstName;
+    const fName = event.results[event.results.length -1][0].transcript.trim();
+    const firstName = document.querySelector('#fname').value = fName;
     console.log(firstName);
     firstName.delete;
-    console.log(event);
+
     waitingForN = false;
     if(firstName){
       speakUp('what is your last name?');
@@ -101,26 +104,25 @@ console.log(event);
       document.getElementById('programs').scrollIntoView({
       behavior: 'smooth'
       });
-    }else if(outPutResult.includes('fly')){
-      const apply = event.results[0][0].transcript.trim();
+    }else if(outPutResult.includes('apply')){
+      const apply = event.results[event.results.length - 1][0].transcript.trim();
       document.getElementById('apply').scrollIntoView({
       behavior: 'smooth'
       });
 
-      if(apply === 'fly'){
+      if(apply === 'apply'){
         speakUp('what is your name?');
         waitingForN = true;
       }
 
     }else if(outPutResult.includes('shut up')){
-      speakUp('sorry if I been noisy, I well not speak again!')
+      speakUp('ok, I well not speak again!')
       recognition.stop();
     }else {
       speakUp('sorry, i dont understand you.');
     }
   }
 }
-
   function applyForCorse(){
     var speechResult = event.results[0][0].transcript.toLowerCase();
     const outPutResult = diagnosticPara.textContent = speechResult;
