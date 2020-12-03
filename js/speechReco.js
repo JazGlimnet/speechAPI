@@ -4,6 +4,7 @@ var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 var recognition = new SpeechRecognition();
+recognition.continuous = true;
 
 var inputPara = document.querySelector('#_input');
 var resultPara = document.querySelector('#result');
@@ -11,7 +12,11 @@ var diagnosticPara = document.querySelector('#outout');
 
 var startBtn = document.querySelector('#start');
 
-
+let waitingForN = false;
+let waitingForLastN = false;
+let waitingForID = false;
+let waitingForEmail = false;
+let waitingForPhone = false;
 
 function getMySound() {
   var grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' +';';
@@ -22,7 +27,8 @@ function getMySound() {
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
 
-  recognition.start();
+
+    recognition.start();
 
   recognition.onend = function(event) {
      //Fired when the speech recognition service has disconnected.
@@ -44,37 +50,74 @@ function getMySound() {
 }
 
 recognition.onresult = function(event) {
-
-  var speechResult = event.results[0][0].transcript.toLowerCase();
+console.log(event);
+  var speechResult = event.results[event.results.length - 1][0].transcript.toLowerCase();
   const outPutResult = diagnosticPara.textContent = speechResult;
   document.querySelector('._speechContainer').style.display = 'none';
   // speakUp(outPutResult);
-  if(outPutResult.includes('home')){
-    document.getElementById('main').scrollIntoView({
-    behavior: 'smooth'
-    });
-  }
-  else if(outPutResult.includes('programs')){
-    document.getElementById('programs').scrollIntoView({
-    behavior: 'smooth'
-    });
-  }
-  else if(outPutResult.includes('apply')){
-    document.getElementById('apply').scrollIntoView({
-    behavior: 'smooth'
-    });
-    speakUp('do you wanna apply for corse?')
-    getMySound();
-    if(outPutResult.includes('yes')){
-      speakUp('what is your first name');
-    }
-    applyForCorse();
 
-    // if(outPutResult === 'yes'){
-    //   speakUp('what is your name?');
-    // }
-  } else {
-    speakUp('sorry, i dont understand you. you can navigat between home, programs and apply');
+  if(waitingForLastN === true){
+    const lastName = event.results[event.results.length -1][0].transcript.trim();
+    document.querySelector('#lname').value = lastName;
+    // lastName.delete;
+    waitingForLastN = false;
+    if(lastName){
+      speakUp('what is your E mail address?');
+      waitingForEmail = true;
+    }
+  }
+
+  if(waitingForEmail === true){
+    const ePost = event.results[event.results.length -1][0].transcript.trim();
+    document.querySelector('#epost').value = ePost;
+    ePost.delete;
+    waitingForEmail = false;
+    if(ePost){
+      speakUp('what is your ID number?');
+      // waitingForID = true;
+      console.log(ePost);
+      console.log(event);
+    }
+  }
+
+  if(waitingForN === true){
+    //speakUp('what is your name?');
+    const firstName = event.results[event.results.length -1][0].transcript.trim();
+    document.querySelector('#fname').value = firstName;
+    console.log(firstName);
+    firstName.delete;
+    console.log(event);
+    waitingForN = false;
+    if(firstName){
+      speakUp('what is your last name?');
+      waitingForLastN = true;
+    }
+  }else {
+    if(outPutResult.includes('home')){
+      document.getElementById('main').scrollIntoView({
+      behavior: 'smooth'
+      });
+    }else if(outPutResult.includes('programs')){
+      document.getElementById('programs').scrollIntoView({
+      behavior: 'smooth'
+      });
+    }else if(outPutResult.includes('fly')){
+      const apply = event.results[0][0].transcript.trim();
+      document.getElementById('apply').scrollIntoView({
+      behavior: 'smooth'
+      });
+
+      if(apply === 'fly'){
+        speakUp('what is your name?');
+        waitingForN = true;
+      }
+
+    }else if(outPutResult.includes('shut up')){
+      speakUp('sorry if I been noisy, I well not speak again!')
+      recognition.stop();
+    }else {
+      speakUp('sorry, i dont understand you.');
+    }
   }
 }
 
@@ -82,7 +125,7 @@ recognition.onresult = function(event) {
     var speechResult = event.results[0][0].transcript.toLowerCase();
     const outPutResult = diagnosticPara.textContent = speechResult;
     // getMySound();
-    if(outPutResult === 'yes'){
+    if(outPutResult.includes('yes')){
       speakUp('what is your name?');
     }
   }
